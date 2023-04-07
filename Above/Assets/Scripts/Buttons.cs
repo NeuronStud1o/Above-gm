@@ -5,14 +5,35 @@ using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
+    public GameObject PlayTransition;
+
+    private void Start()
+    {
+        PlayTransition.SetActive(false);
+    }
+
+    IEnumerator WaitForSecondsExample1()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    IEnumerator WaitForSecondsExample2()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+    }
+
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        PlayTransition.SetActive(true);
+        StartCoroutine(WaitForSecondsExample1());
     }
 
     public void RetryGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+        PlayTransition.SetActive(true);
+        StartCoroutine(WaitForSecondsExample2());
     }
 
     public void MainGame()

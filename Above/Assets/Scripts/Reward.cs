@@ -12,6 +12,8 @@ public class Reward : MonoBehaviour
 
     private ulong lastOpen;
 
+    public GameObject Done;
+
     void Start()
     {
         RewardButton = GetComponent<Button>();
@@ -20,6 +22,7 @@ public class Reward : MonoBehaviour
 
         if (!isReady())
         {
+            Done.SetActive(false);
             RewardButton.interactable = false;
         }
     }
@@ -31,10 +34,12 @@ public class Reward : MonoBehaviour
         {
             if(isReady())
             {
+                Done.SetActive(true);
                 RewardButton.interactable = true;
                 Timer.text = "Ready";
                 return;
             }
+
             ulong diff = ((ulong)DateTime.Now.Ticks - lastOpen);
             ulong m = diff / TimeSpan.TicksPerMillisecond;
             float seconleft = (float)(msToWait - m) / 1000.0f;
@@ -54,6 +59,7 @@ public class Reward : MonoBehaviour
     {   
         lastOpen = (ulong)DateTime.Now.Ticks;
         PlayerPrefs.SetString("lastOpen", lastOpen.ToString());
+        Done.SetActive(false);
         RewardButton.interactable = false;
     }
 

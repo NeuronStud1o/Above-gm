@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     {
         direction = Direction.Right;
         rb = GetComponent<Rigidbody2D>();
+
         jumpSound = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
     }

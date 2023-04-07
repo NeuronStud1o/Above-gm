@@ -9,6 +9,9 @@ public class CoinsManager : MonoBehaviour
     public Text moneyText;
     public GameObject CoinsF;
 
+    public AudioClip GetCoin;
+    public AudioSource coin;
+
     public int coinsS;
     public Text moneyText2;
     public GameObject CoinsS;
@@ -24,6 +27,8 @@ public class CoinsManager : MonoBehaviour
         {
             coinsS = PlayerPrefs.GetInt("coinsS");
         }
+
+        coin = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -39,12 +44,14 @@ public class CoinsManager : MonoBehaviour
         if (collision.gameObject.tag == "FlyCoin")
         {
             coinsF++;
+            coin.PlayOneShot(GetCoin);
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "SuperCoin")
         {
             coinsS++;
+            coin.PlayOneShot(GetCoin);
             Destroy(collision.gameObject);
         }
     }
